@@ -1,7 +1,15 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
-    title: "My Gatsby Site",
+    title: "keisukesan",
   },
-  plugins: ["gatsby-plugin-emotion"],
+  plugins: [
+    "gatsby-plugin-emotion",
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        outputPath: `src/__generated__/gatsby-types.d.ts`,
+      },
+    },
+  ],
 };
