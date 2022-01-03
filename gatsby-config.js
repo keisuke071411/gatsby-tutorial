@@ -11,5 +11,21 @@ module.exports = {
         outputPath: `src/__generated__/gatsby-types.d.ts`,
       },
     },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: process.env.MICROCMS_API_KEY,
+        serviceId: "gatsby-tutorial",
+        apis: [
+          {
+            endpoint: "blogs",
+          },
+        ],
+      },
+    },
   ],
 };
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
