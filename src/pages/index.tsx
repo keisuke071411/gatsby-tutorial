@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 
 export const query = graphql`
   query TopPage {
@@ -7,11 +7,11 @@ export const query = graphql`
       edges {
         node {
           body
-          id
           thumbnail {
             url
           }
           title
+          blogsId
         }
       }
     }
@@ -25,14 +25,10 @@ const IndexPage = ({ data }: PageProps<GatsbyTypes.TopPageQuery>) => {
       <p>hello gatsby</p>
       <ul>
         {data.allMicrocmsBlogs.edges.map(({ node }) => (
-          <li key={node.id}>
-            {node?.title && <p>{node.title}</p>}
-            {node?.thumbnail?.url && (
-              <img width={480} src={node.thumbnail.url} alt={node.title} />
-            )}
-            {node?.body && (
-              <p dangerouslySetInnerHTML={{ __html: node.body }} />
-            )}
+          <li key={node.blogsId}>
+            <Link to={node.blogsId ?? "/"}>
+              {node?.title && <p>{node.title}</p>}
+            </Link>
           </li>
         ))}
       </ul>
