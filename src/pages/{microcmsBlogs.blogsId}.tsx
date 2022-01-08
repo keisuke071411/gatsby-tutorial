@@ -7,12 +7,28 @@ export const query = graphql`
       body
       title
       blogsId
+      thumbnail {
+        url
+      }
     }
   }
 `;
 
 const BlogDetail = ({ data }: PageProps<GatsbyTypes.BlogDetailQuery>) => {
-  return <div>{JSON.stringify(data.microcmsBlogs)}</div>;
+  return (
+    <div>
+      <h1>{data.microcmsBlogs?.title}</h1>
+      <img
+        src={data.microcmsBlogs?.thumbnail?.url ?? "../images/hacktyu.png"}
+        alt={data.microcmsBlogs?.title ?? "default alt"}
+        loading="lazy"
+        width={896}
+      />
+      <div
+        dangerouslySetInnerHTML={{ __html: data.microcmsBlogs?.body ?? "本文" }}
+      />
+    </div>
+  );
 };
 
 export default BlogDetail;
